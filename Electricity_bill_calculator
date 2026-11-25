@@ -1,0 +1,41 @@
+# Electricity Bill Calculator
+def validate_units(units):
+    if units < 0:
+        raise ValueError("Units consumed cannot be negative")
+    if units > 10000:
+        raise ValueError("Units consumed seems too high")
+    return units
+
+def energy_charge(units):
+    units = validate_units(units)
+    if units <= 100:
+        return units * 1.5
+    elif units <= 200:
+        return 100 * 1.5 + (units - 100) * 2.5
+    elif units <= 300:
+        return 100 * 1.5 + 100 * 2.5 + (units - 200) * 4.0
+    return 100 * 1.5 + 100 * 2.5 + 100 * 4.0 + (units - 300) * 6.0
+
+def fixed_charge(units):
+    units = validate_units(units)
+    return 50.0
+
+def tax_amount(units):
+    return energy_charge(units) * 0.05
+
+def total_bill(units):
+    return energy_charge(units) + fixed_charge(units) + tax_amount(units)
+
+# Main program
+if __name__ == "__main__":
+    print("===== ELECTRICITY BILL CALCULATOR =====")
+    units = float(input("Enter units consumed: "))
+    print("\n----- BILL SUMMARY -----")
+    print("Units Consumed:", units)
+    print("Energy Charge:", round(energy_charge(units), 2))
+    print("Fixed Charge:", round(fixed_charge(units), 2))
+    print("Tax (5%):", round(tax_amount(units), 2))
+    print("Total Bill:", round(total_bill(units), 2))
+```[cite: 2]
+
+*(Note: Lines 1–30 match the code in the screenshot[cite: 2]; the remaining lines in `__main__` are a standard completion since the bottom of the image is cut off.)*
